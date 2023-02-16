@@ -1,0 +1,112 @@
+# i3 config file (v1)
+# setup
+exec --no-startup-id feh --bg-scale .config/i3/wallpaper.jpg
+exec setxkbmap fr
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+set $refresh_i3status killall -SIGUSR1 i3status
+font pango:AverageMono 11
+floating_modifier $mod
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym m resize grow width 10 px or 10 ppt
+        bindsym $l resize shrink width 10 px or 10 ppt
+        bindsym $d resize grow height 10 px or 10 ppt
+        bindsym $u resize shrink height 10 px or 10 ppt
+        bindsym $r resize grow width 10 px or 10 ppt
+        bindsym $return mode "default"
+        bindsym $esc mode "default"
+        bindsym $mod+r mode "default"
+}
+bar {
+	status_command i3status
+	output primary
+	tray_output none
+	font pango:DejaVu Sans Mono 10
+	separator_symbol " | "
+}
+
+# set
+## basic
+set $mod Mod4
+set $ctrl Control_L
+set $shift Shift
+set $esc Escape
+set $return Return
+set $super_l Super_L
+## bar
+set $print Print
+set $volup XF86AudioRaiseVolume
+set $voldown XF86AudioLowerVolume
+set $volmute XF86AudioMute
+set $lightup XF86MonBrightnessUp
+set $lightdown XF86MonBrightnessDown
+## keys
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $l Left
+set $r Right
+set $u Up
+set $d Down
+
+# binds
+## basic
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+$shift+A kill
+bindsym $mod+$l focus left
+bindsym $mod+$d focus down
+bindsym $mod+$u focus up
+bindsym $mod+$r focus right
+bindsym $mod+$shift+$l move left
+bindsym $mod+$shift+$d move down
+bindsym $mod+$shift+$u move up
+bindsym $mod+$shift+$r move right
+bindsym $mod+f fullscreen toggle
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+$shift+space floating toggle
+bindsym $mod+$shift+alt focus mode_toggle
+# Workspaces
+bindsym $mod+ampersand workspace number $ws1
+bindsym $mod+eacute workspace number $ws2
+bindsym $mod+quotedbl workspace number $ws3
+bindsym $mod+apostrophe workspace number $ws4
+bindsym $mod+parenleft workspace number $ws5
+# Workspaces
+bindsym $mod+$shift+1 move container to workspace number $ws1
+bindsym $mod+$shift+eacute move container to workspace number $ws2
+bindsym $mod+$shift+3 move container to workspace number $ws3
+bindsym $mod+$shift+4 move container to workspace number $ws4
+bindsym $mod+$shift+5 move container to workspace number $ws5
+# Misc
+bindsym $mod+$shift+c reload
+bindsym $mod+$shift+r restart
+bindsym $mod+$shift+e exec "i3-nagbar -t warning -m 'Logout ?' -B 'Yes' 'i3-msg exit'"
+bindsym $mod+r mode "resize"
+
+## personal
+# Main 
+bindsym $mod+$return exec i3-sensible-terminal
+bindsym $mod+space exec i3-dmenu-desktop
+
+bindsym $mod+$shift+f exec firefox
+bindsym $mod+$shift+d exec discord
+bindsym $mod+$shift+s exec spotify
+bindsym $mod+shift+t exec typora
+bindsym $mod+$shift+$esc exec "i3lock -i .config/i3/i3lock.png"
+
+## volume+brightness
+bindsym $voldown "exec amixer set Master -q 5%-"
+bindsym $volup "exec amixer set Master -q 5%+"
+bindsym $volmute "exec amixer set Master -q toggle"
+bindsym $lightup exec "light -A 10"
+bindsym $lightdown exec "light -U 10"
+
+## player control
+bindsym $playpause exec playerctl play-pause
