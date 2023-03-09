@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. infos.conf
+. conf_files/infos.conf
 
 #	Error return	#
 return_error="echo status=aborted: "
@@ -66,3 +66,6 @@ _setting_up_git() {
 _setting_up_folders() {
 	echo "not yet implemented"
 }
+
+echo "Action selector to be done"
+exit 0
